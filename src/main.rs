@@ -3,32 +3,32 @@ use rand::Rng;
 use std::io;
 
 fn main() {
-    let secret_num = rand::thread_rng().gen_range(0..=10);
+    let secret_number = rand::thread_rng().gen_range(0..=10);
 
-    println!("Welcome to the Guessing Game!\n");
+    println!("Welcome to a Guessing Game!\n");
 
     loop {
-        println!("Please enter a number in the range [0, 10]:");
+        println!("Please enter a number between 0 and 10:");
 
         let mut guess = String::new();
 
         io::stdin()
             .read_line(&mut guess)
-            .expect("Failed to read number!");
+            .expect("Failed to read input!");
 
-        let guessed_num = match guess.trim().parse::<u32>() {
+        let guessed_number = match guess.trim().parse::<u32>() {
             Ok(num) => num,
             Err(_) => return,
         };
 
-        if guessed_num == secret_num {
-            println!("{}", "Your guess is correct".green());
+        if guessed_number == secret_number {
+            println!("{}", "Your guess is correct".blue());
             break;
         } else {
-            if secret_num < guessed_num {
-                println!("{}", "Your guesses number is too big!".red());
+            if secret_number < guessed_number {
+                println!("{}", "Your number is too big! Guess again!".red());
             } else {
-                println!("{}", "Your guesses number is too small!".red());
+                println!("{}", "Your number is too small! Guess again!".red());
             }
         }
     }
